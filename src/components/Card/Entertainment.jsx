@@ -1,6 +1,8 @@
 import "./style.css";
-import {BsClock,BsFillPersonFill}from "react-icons/bs"
-export const  Entertainment= ({ cards }) => {
+import { BsClock, BsFillPersonFill } from "react-icons/bs";
+import { MainContext, useContext } from "../Context";
+export const Entertainment = () => {
+  const { cards } = useContext(MainContext);
   return (
     <div className="main">
       {cards.slice(4, 5).map((card) => {
@@ -9,19 +11,19 @@ export const  Entertainment= ({ cards }) => {
             <div className="img-item">
               <img src={card.imageUrl} alt="/" />
               <div className="footer-item">
-              <div className="icon">
-                <BsClock/>
-            <span>{card.date}</span>
+                <div className="icon">
+                  <BsClock />
+                  <span>{card.date}</span>
+                </div>
+                <div className="icon">
+                  <BsFillPersonFill />
+                  <span>{card.author}</span>
+                </div>
+              </div>
             </div>
-              <div className="icon">
-            <BsFillPersonFill/>
-            <span>{card.author}</span>
-            </div>
-            </div>
-            </div>
-            <div className="content-item" >
-                <h1>{card.title}</h1>
-                <p>{card.content}</p>
+            <div className="content-item">
+              <h1>{card.title}</h1>
+              <p>{card.content}</p>
             </div>
           </div>
         );

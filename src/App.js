@@ -1,9 +1,17 @@
 import "./App.css";
 import { Cards } from "./components/Cards/Cards";
-import { NavLink ,Routes,Route} from "react-router-dom";
+import { NavLink, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Business,Sports,World,Technology,Entertainment,Science } from "./components/Card";
+import { MainContext } from "./components/Context";
+import {
+  Business,
+  Sports,
+  World,
+  Technology,
+  Entertainment,
+  Science,
+} from "./components/Card";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -17,12 +25,15 @@ function App() {
       });
   }, []);
 
-  const activeLink=({isActive})=>{
-    return{
-      color:isActive? "blue":"black",
-
-    }
-  }
+  const activeLink = ({ isActive }) => {
+    return {
+      color: isActive ? "blue" : "black",
+    };
+  };
+  const datas = {
+    cards,
+    setCards,
+  };
   return (
     <div className="App">
       <header className="header">
@@ -33,39 +44,55 @@ function App() {
           <nav>
             <ul>
               <li>
-                <NavLink to="/" style={activeLink}>All</NavLink>
+                <NavLink to="/" style={activeLink}>
+                  All
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/Business"  style={activeLink}>Business</NavLink>
+                <NavLink to="/Business" style={activeLink}>
+                  Business
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/Sports" style={activeLink}>Sports</NavLink>
+                <NavLink to="/Sports" style={activeLink}>
+                  Sports
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/World" style={activeLink}>World</NavLink>
+                <NavLink to="/World" style={activeLink}>
+                  World
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/Technology" style={activeLink}>Technology</NavLink>
+                <NavLink to="/Technology" style={activeLink}>
+                  Technology
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/Entertainment" style={activeLink}>Entertainment</NavLink>
+                <NavLink to="/Entertainment" style={activeLink}>
+                  Entertainment
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/Science" style={activeLink}>Science</NavLink>
+                <NavLink to="/Science" style={activeLink}>
+                  Science
+                </NavLink>
               </li>
             </ul>
           </nav>
         </div>
       </header>
-       <Routes>
-        <Route path="/" element={<Cards cards={cards}/>}/>
-      <Route path="/business" element={<Business cards={cards}/>} />
-      <Route path="/sports" element={<Sports cards={cards}/>} />
-      <Route path="/world" element={<World cards={cards}/>} />
-      <Route path="/technology" element={<Technology cards={cards}/>} />
-      <Route path="/entertainment" element={<Entertainment cards={cards}/>} />
-      <Route path="/science" element={<Science cards={cards}/>} />
-      </Routes>
+      <MainContext.Provider value={datas}>
+        <Routes>
+          <Route path="/" element={<Cards />} />
+          <Route path="/business" element={<Business />} />
+          <Route path="/sports" element={<Sports />} />
+          <Route path="/world" element={<World />} />
+          <Route path="/technology" element={<Technology />} />
+          <Route path="/entertainment" element={<Entertainment />} />
+          <Route path="/science" element={<Science />} />
+        </Routes>
+      </MainContext.Provider>
     </div>
   );
 }
