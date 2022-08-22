@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,500;1,400&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Exo 2";
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #e5e5e5;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+  background-color: red;
+  background: linear-gradient(
+    269.38deg,
+    rgba(172, 0, 253, 0.58) 20.07%,
+    rgba(0, 248, 233, 0.58) 82.18%
+  );
+  background-image: url("images/background-img.jpg");
+  background-size: cover;
+  height: 296px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.news{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 60px;
+}
+.header h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 60px;
   color: white;
+  width: 100px;
 }
-
-.App-link {
-  color: #61dafb;
+.title-bar nav {
+  width: 100%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.title-bar nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 70px;
+}
+nav ul li {
+  margin: 10px;
+  background-color: white;
+  height: 43px;
+  text-align: center;
+  padding: 10px 20px;
+  list-style: none;
+  border-radius: 10px;
+}
+ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19.2px;
 }
