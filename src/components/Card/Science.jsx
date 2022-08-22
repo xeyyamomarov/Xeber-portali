@@ -19,7 +19,7 @@ export const  Science= ({ cards }) => {
             </div>
             </div>
             </div>
-            <div className="content-item" >
+            <div className="content-item">
                 <h1>{card.title}</h1>
                 <p>{card.content}</p>
             </div>

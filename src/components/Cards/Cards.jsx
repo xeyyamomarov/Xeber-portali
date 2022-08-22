@@ -14,7 +14,7 @@ export const Cards = ({cards}) => {
                 <div className="icon">
                 <BsClock/>
             <span>{card.date}</span>
-            </div>e
+            </div>
                 <div className="icon">
             <BsFillPersonFill/>
             <span>{card.author}</span>
