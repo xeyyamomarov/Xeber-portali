@@ -1,33 +1,42 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { MainContext, useContext } from "../Context";
+// import { MainContext, useContext } from "../Context";
+import { useEffect,useState} from "react";
+import axios from "axios";
 export const World = () => {
-  const { cards } = useContext(MainContext);
+  const[world,setWorld]=useState([])
+  useEffect(() => {
+    axios
+      .get("https://inshorts.deta.dev/news?category=world")
+      .then((res) => res.data)
+      .then((datas) => {
+        const { data } = datas;
+        setWorld(data);
+      });
+  }, []);
   return (
+    <div className="all-cards">
     <div className="main">
-      {cards.slice(2, 3).map((card) => {
+      {world.slice(0, 6).map((card) => {
         return (
-          <div className="card-item" key={card.id}>
-            <div className="img-item">
-              <img src={card.imageUrl} alt="/" />
-              <div className="footer-item">
-                <div className="icon">
-                  <BsClock />
-                  <span>{card.date}</span>
-                </div>
-                <div className="icon">
-                  <BsFillPersonFill />
-                  <span>{card.author}</span>
-                </div>
-              </div>
+          <div className="card" key={card.id}>
+          <img className="img" src={card.imageUrl} alt="/" />
+          <h1 className="title">{card.title}</h1>
+          <p className="content">{card.content}</p>
+          <div className="footer">
+            <div className="icon">
+              <BsClock />
+              <span>{card.date}</span>
             </div>
-            <div className="content-item">
-              <h1>{card.title}</h1>
-              <p>{card.content}</p>
+            <div className="icon">
+              <BsFillPersonFill />
+              <span>{card.author}</span>
             </div>
           </div>
+        </div>
         );
       })}
+    </div>
     </div>
   );
 };

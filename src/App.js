@@ -17,7 +17,7 @@ function App() {
   const [cards, setCards] = useState([]);
   useEffect(() => {
     axios
-      .get("https://inshorts.deta.dev/news?category=science")
+      .get("https://inshorts.deta.dev/news?category=all")
       .then((res) => res.data)
       .then((datas) => {
         const { data } = datas;

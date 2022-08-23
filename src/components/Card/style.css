@@ -1,6 +1,10 @@
 .main{
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    position: absolute;
+    top: 210px;
+    align-items: center;
+    justify-items: center;
 }
 .card-item{
     width: 1076px;
@@ -14,10 +18,8 @@
     top: 220px;
 }
 @media screen and (max-width: 1100px) {
-    .card-item {
-        width: 500px;
-        height: 750px;
-      flex-direction: column;
+    .main {
+      grid-template-columns: repeat(2, 420px);
     }
   }
 .img-item{
