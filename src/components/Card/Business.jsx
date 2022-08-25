@@ -1,31 +1,19 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { BusinessItem } from "../CardItem/BusinessItem";
-export const Business = () => {
-  const [business, setBusiness] = useState([]);
+import { useNavigate } from "react-router-dom";
+
+export const Business = ({business}) => {
 
   const navigate = useNavigate();
-  useEffect(() => {
-    axios
-      .get("https://inshorts.deta.dev/news?category=business")
-      .then((res) => res.data)
-      .then((datas) => {
-        const { data } = datas;
-        setBusiness(data);
-      });
-  }, []);
-  // console.log(business);
+
   return (
     <div className="all-cards">
       <div className="main">
-        {business.slice(0, 6).map((card) => {
+        {business?.slice(0, 6).map((card) => {
           return (
             <div
               onClick={() => {
-                navigate(`/business/${card.id}`);
+                navigate(`${card.id}`);
               }}
               className="card"
               key={card.id}
@@ -47,9 +35,6 @@ export const Business = () => {
           );
         })}
       </div>
-      <Routes>
-        <Route path="/business/:id/*" element={<BusinessItem business={business}/>} />
-      </Routes>
     </div>
   );
 };

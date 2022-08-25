@@ -7,9 +7,7 @@ export const BusinessItem = ({ business }) => {
   return (
     <div>
       <div className="main-item">
-        {business
-          .filter((card) => card.id === id)
-          .map((card) => {
+        {business?.filter((card) => card.id === id)?.map((card) => {
             return (
               <div key={card.id} className="card-item">
                 <div className="img-item">
@@ -35,11 +33,11 @@ export const BusinessItem = ({ business }) => {
       </div>
       <div className="similar-news">
         <div className="a">
-        <p>Similar news</p>
+          <p>Similar news</p>
         </div>
 
         <div className="data">
-          {business.slice(0, 3).map((business) => {
+          {business?.slice(0, 3).map((business) => {
             return (
               <div key={business.id} className="similar-card">
                 <div className="similar-content">

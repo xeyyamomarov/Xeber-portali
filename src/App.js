@@ -18,6 +18,8 @@ import { SportItem } from "./components/CardItem/SportsItem";
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [business, setBusiness] = useState([]);
+
   useEffect(() => {
     axios
       .get("https://inshorts.deta.dev/news?category=all")
@@ -26,7 +28,16 @@ function App() {
         const { data } = datas;
         setCards(data);
       });
+    axios
+      .get("https://inshorts.deta.dev/news?category=business")
+      .then((res) => res.data)
+      .then((datas) => {
+        const { data } = datas;
+        setBusiness(data);
+      });
   }, []);
+
+  console.log(business);
 
   const activeLink = ({ isActive }) => {
     return {
@@ -83,16 +94,16 @@ function App() {
         </div>
       </header>
       <Routes>
-        <Route path="/*" element={<Cards cards={cards} />} />
-        <Route path="/business/*" element={<Business />} />
-        <Route path="/sports/*" element={<Sports />} />
-        <Route path="/sports/:id/*" element={<SportItem/>} />
+        <Route path="/" element={<Cards cards={cards} />} />
+        <Route path=":id" element={<CardItem cards={cards} />} />
+        <Route path="/business" element={<Business business={business} />} />
+        <Route path="/business/:id" element={<BusinessItem business={business} />} />
+        <Route path="/sports" element={<Sports />} />
+        <Route path="/sports:id" element={<SportItem />} />
         <Route path="/world" element={<World />} />
         <Route path="/technology" element={<Technology />} />
         <Route path="/entertainment" element={<Entertainment />} />
         <Route path="/science" element={<Science />} />
-        <Route path="/business/:id/*" element={<BusinessItem />} />
-        <Route path="/all/:id/*" element={<CardItem cards={cards}/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

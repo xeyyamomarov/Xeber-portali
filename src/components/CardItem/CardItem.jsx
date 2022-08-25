@@ -1,14 +1,23 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const CardItem = ({ cards }) => {
+  const [cardsData, setCardsData] = useState([]);
   const { id } = useParams();
+
+  useEffect(() => {
+    setCardsData(cards)
+  }, [cards])
+
+  console.log(cardsData);
+
   return (
     <div>
       <div className="main-item">
-        {cards?.filter((card) => card.id === id)
-          ?.map((card) => {
+        {/* {cardsData && cardsData.filter((card) => card.id === id)
+          .map((card) => {
             return (
               <div key={card.id} className="card-item">
                 <div className="img-item">
@@ -30,15 +39,16 @@ export const CardItem = ({ cards }) => {
                 </div>
               </div>
             );
-          })}
+          })} */}
+          {cardsData && "salam"}
       </div>
       <div className="similar-news">
         <div className="a">
-        <p>Similar news</p>
+          <p>Similar news</p>
         </div>
 
         <div className="data">
-          {cards?.slice(0, 3).map((card) => {
+          {cardsData && cardsData.slice(0, 3).map((card) => {
             return (
               <div key={card.id} className="similar-card">
                 <div className="similar-content">

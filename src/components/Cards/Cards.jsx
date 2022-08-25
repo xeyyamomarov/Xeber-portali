@@ -11,7 +11,7 @@ export const Cards = ({cards}) => {
           return (
             <div className="card" key={card.id}
             onClick={()=>{
-              navigate(`/all/${card.id}`)
+              navigate(`/${card.id}`)
             }}
             >
               <img className="img" src={card.imageUrl} alt="/" />
