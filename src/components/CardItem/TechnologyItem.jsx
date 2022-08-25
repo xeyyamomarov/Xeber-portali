@@ -35,7 +35,7 @@ export const TechnologyItem = () => {
           })}
       </div>
       <div className="similar-news">
-        <div className="a">
+        <div id="news">
         <p>Similar news</p>
         </div>
 
