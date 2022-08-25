@@ -1,14 +1,19 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { MainContext, useContext } from "../Context";
-export const Cards = () => {
-  const { cards } = useContext(MainContext);
+import { useNavigate} from "react-router-dom";
+export const Cards = ({cards}) => {
+  const navigate=useNavigate()
+
   return (
     <div className="all-cards">
       <div className="cards">
-        {cards.slice(0, 6).map((card) => {
+        {cards?.slice(0, 6).map((card) => {
           return (
-            <div className="card" key={card.id}>
+            <div className="card" key={card.id}
+            onClick={()=>{
+              navigate(`/all/${card.id}`)
+            }}
+            >
               <img className="img" src={card.imageUrl} alt="/" />
               <h1 className="title">{card.title}</h1>
               <p className="content">{card.content}</p>

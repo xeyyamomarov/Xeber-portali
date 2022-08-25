@@ -3,7 +3,6 @@ import { Cards } from "./components/Cards/Cards";
 import { NavLink, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { MainContext } from "./components/Context";
 import {
   Business,
   Sports,
@@ -12,6 +11,10 @@ import {
   Entertainment,
   Science,
 } from "./components/Card";
+import { BusinessItem } from "./components/CardItem/BusinessItem";
+import { NotFoundPage } from "./components/Card/NotFoundPage";
+import { CardItem } from "./components/CardItem/CardItem";
+import { SportItem } from "./components/CardItem/SportsItem";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -30,10 +33,7 @@ function App() {
       color: isActive ? "blue" : "black",
     };
   };
-  const datas = {
-    cards,
-    setCards,
-  };
+
   return (
     <div className="App">
       <header className="header">
@@ -49,7 +49,7 @@ function App() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/Business" style={activeLink}>
+                <NavLink to="/business" style={activeLink}>
                   Business
                 </NavLink>
               </li>
@@ -82,17 +82,19 @@ function App() {
           </nav>
         </div>
       </header>
-      <MainContext.Provider value={datas}>
-        <Routes>
-          <Route path="/" element={<Cards />} />
-          <Route path="/business" element={<Business />} />
-          <Route path="/sports" element={<Sports />} />
-          <Route path="/world" element={<World />} />
-          <Route path="/technology" element={<Technology />} />
-          <Route path="/entertainment" element={<Entertainment />} />
-          <Route path="/science" element={<Science />} />
-        </Routes>
-      </MainContext.Provider>
+      <Routes>
+        <Route path="/*" element={<Cards cards={cards} />} />
+        <Route path="/business/*" element={<Business />} />
+        <Route path="/sports/*" element={<Sports />} />
+        <Route path="/sports/:id/*" element={<SportItem/>} />
+        <Route path="/world" element={<World />} />
+        <Route path="/technology" element={<Technology />} />
+        <Route path="/entertainment" element={<Entertainment />} />
+        <Route path="/science" element={<Science />} />
+        <Route path="/business/:id/*" element={<BusinessItem />} />
+        <Route path="/all/:id/*" element={<CardItem cards={cards}/>} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 }
