@@ -47,9 +47,7 @@ export const Business = () => {
           );
         })}
       </div>
-      <Routes>
-        <Route path="/business/:id/*" element={<BusinessItem business={business}/>} />
-      </Routes>
+      <BusinessItem business={business}/>
     </div>
   );
 };

@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 
 export const BusinessItem = ({ business }) => {
   const { id } = useParams();
+  console.log(business)
   return (
     <div>
       <div className="main-item">
-        {business
-          .filter((card) => card.id === id)
+        {business?.filter((card) => card.id === id)
           .map((card) => {
             return (
               <div key={card.id} className="card-item">
@@ -39,7 +39,7 @@ export const BusinessItem = ({ business }) => {
         </div>
 
         <div className="data">
-          {business.slice(0, 3).map((business) => {
+          {business?.slice(0, 3).map((business) => {
             return (
               <div key={business.id} className="similar-card">
                 <div className="similar-content">

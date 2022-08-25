@@ -27,6 +27,7 @@ function App() {
         setCards(data);
       });
   }, []);
+  console.log(cards);
 
   const activeLink = ({ isActive }) => {
     return {
@@ -83,16 +84,17 @@ function App() {
         </div>
       </header>
       <Routes>
-        <Route path="/*" element={<Cards cards={cards} />} />
-        <Route path="/business/*" element={<Business />} />
+        <Route path="/" element={<Cards cards={cards} />} />
+        <Route path="/business" element={<Business />}>
+          <Route path=":id" element={<BusinessItem />} />
+        </Route>
         <Route path="/sports/*" element={<Sports />} />
-        <Route path="/sports/:id/*" element={<SportItem/>} />
+        <Route path="/sports/:id/*" element={<SportItem />} />
         <Route path="/world" element={<World />} />
         <Route path="/technology" element={<Technology />} />
         <Route path="/entertainment" element={<Entertainment />} />
         <Route path="/science" element={<Science />} />
-        <Route path="/business/:id/*" element={<BusinessItem />} />
-        <Route path="/all/:id/*" element={<CardItem cards={cards}/>} />
+        <Route path="/all/:id/*" element={<CardItem cards={cards} />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
