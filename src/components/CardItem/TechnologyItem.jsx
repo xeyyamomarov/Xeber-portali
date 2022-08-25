@@ -1,60 +1,59 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
-import { MainContext, useContext } from "../Context";
+import { MainContext,useContext } from "../Context";
 
-export const SportItem = () => {
+export const TechnologyItem = () => {
   const { id } = useParams();
-  const { sports } = useContext(MainContext);
+  const{technology}=useContext(MainContext)
   return (
     <div>
       <div className="main-item">
-        {sports
-          .filter((sport) => sport.id === id)
-          .map((sport) => {
+        {technology?.filter((card) => card.id === id)
+          .map((card) => {
             return (
-              <div key={sport.id} className="card-item">
+              <div key={card.id} className="card-item">
                 <div className="img-item">
-                  <img src={sport.imageUrl} alt="/" />
+                  <img src={card.imageUrl} alt="/" />
                   <div className="footer-item">
                     <div className="icon">
                       <BsClock />
-                      <span>{sport.date}</span>
+                      <span>{card.date}</span>
                     </div>
                     <div className="icon">
                       <BsFillPersonFill />
-                      <span>{sport.author}</span>
+                      <span>{card.author}</span>
                     </div>
                   </div>
                 </div>
                 <div className="content-item">
-                  <h1>{sport.title}</h1>
-                  <p>{sport.content}</p>
+                  <h1>{card.title}</h1>
+                  <p>{card.content}</p>
                 </div>
               </div>
             );
           })}
       </div>
       <div className="similar-news">
-        <div id="news">
-          <p>Similar news</p>
+        <div className="a">
+        <p>Similar news</p>
         </div>
 
         <div className="data">
-          {sports?.slice(0, 3).map((sport) => {
+          {technology?.slice(0, 3).map((business) => {
             return (
-              <div key={sport.id} className="similar-card">
+              <div key={business.id} className="similar-card">
                 <div className="similar-content">
-                  <h1>{sport.title}</h1>
+                  <h1>{business.title}</h1>
                 </div>
                 <div className="footer-similar">
                   <div className="icon">
                     <BsClock />
-                    <span>{sport.date}</span>
+                    <span>{business.date}</span>
                   </div>
                   <div className="icon">
                     <BsFillPersonFill />
-                    <span>{sport.author}</span>
+                    <span>{business.author}</span>
                   </div>
                 </div>
               </div>

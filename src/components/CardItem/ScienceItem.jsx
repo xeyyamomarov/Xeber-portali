@@ -3,13 +3,13 @@ import { BsClock, BsFillPersonFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { MainContext, useContext } from "../Context";
 
-export const SportItem = () => {
+export const ScienceItem = () => {
   const { id } = useParams();
-  const { sports } = useContext(MainContext);
+  const { science } = useContext(MainContext);
   return (
     <div>
       <div className="main-item">
-        {sports
+        {science
           .filter((sport) => sport.id === id)
           .map((sport) => {
             return (
@@ -36,12 +36,12 @@ export const SportItem = () => {
           })}
       </div>
       <div className="similar-news">
-        <div id="news">
+        <div className="a">
           <p>Similar news</p>
         </div>
 
         <div className="data">
-          {sports?.slice(0, 3).map((sport) => {
+          {science?.slice(0, 3).map((sport) => {
             return (
               <div key={sport.id} className="similar-card">
                 <div className="similar-content">

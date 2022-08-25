@@ -1,14 +1,16 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
+import { MainContext,useContext } from "../Context";
 
-export const CardItem = ({ cards }) => {
+export const CardItem = () => {
   const { id } = useParams();
+  const{cards}=useContext(MainContext)
   return (
     <div>
       <div className="main-item">
         {cards?.filter((card) => card.id === id)
-          ?.map((card) => {
+          .map((card) => {
             return (
               <div key={card.id} className="card-item">
                 <div className="img-item">
@@ -33,7 +35,7 @@ export const CardItem = ({ cards }) => {
           })}
       </div>
       <div className="similar-news">
-        <div className="a">
+        <div id="news">
         <p>Similar news</p>
         </div>
 

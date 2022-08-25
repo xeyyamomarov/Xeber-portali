@@ -1,10 +1,12 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
+import { MainContext,useContext } from "../Context";
 
-export const BusinessItem = ({ business }) => {
+export const BusinessItem = () => {
   const { id } = useParams();
-  console.log(business)
+  const{business}=useContext(MainContext)
+  // console.log(business)
   return (
     <div>
       <div className="main-item">
@@ -26,15 +28,15 @@ export const BusinessItem = ({ business }) => {
                   </div>
                 </div>
                 <div className="content-item">
-                  <h1>{business.title}</h1>
-                  <p>{business.content}</p>
+                  <h1>{card.title}</h1>
+                  <p>{card.content}</p>
                 </div>
               </div>
             );
           })}
       </div>
       <div className="similar-news">
-        <div className="a">
+        <div id="news">
         <p>Similar news</p>
         </div>
 

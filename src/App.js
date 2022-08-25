@@ -3,6 +3,7 @@ import { Cards } from "./components/Cards/Cards";
 import { NavLink, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { MainContext } from "./components/Context";
 import {
   Business,
   Sports,
@@ -15,9 +16,19 @@ import { BusinessItem } from "./components/CardItem/BusinessItem";
 import { NotFoundPage } from "./components/Card/NotFoundPage";
 import { CardItem } from "./components/CardItem/CardItem";
 import { SportItem } from "./components/CardItem/SportsItem";
+import { WorldItem } from "./components/CardItem/WorldItem";
+import { TechnologyItem } from "./components/CardItem/TechnologyItem";
+import { EntertainmentItem } from "./components/CardItem/EntertainmentItem";
+import { ScienceItem } from "./components/CardItem/ScienceItem";
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [business, setBusiness] = useState([]);
+  const [sports, setSports] = useState([]);
+  const [world, setWorld] = useState([]);
+  const [science, setScience] = useState([]);
+  const [technology, setTechnology] = useState([]);
+  const [entertainments, setEntertainments] = useState([]);
   useEffect(() => {
     axios
       .get("https://inshorts.deta.dev/news?category=all")
@@ -26,13 +37,64 @@ function App() {
         const { data } = datas;
         setCards(data);
       });
+
+    axios
+      .get("https://inshorts.deta.dev/news?category=business")
+      .then((res) => res.data)
+      .then((datas) => {
+        const { data } = datas;
+        setBusiness(data);
+      });
   }, []);
-  console.log(cards);
+  axios
+    .get("https://inshorts.deta.dev/news?category=sports")
+    .then((res) => res.data)
+    .then((datas) => {
+      const { data } = datas;
+      setSports(data);
+    });
+  axios
+    .get("https://inshorts.deta.dev/news?category=world")
+    .then((res) => res.data)
+    .then((datas) => {
+      const { data } = datas;
+      setWorld(data);
+    });
+  axios
+    .get("https://inshorts.deta.dev/news?category=science")
+    .then((res) => res.data)
+    .then((datas) => {
+      const { data } = datas;
+      setScience(data);
+    });
+  axios
+    .get("https://inshorts.deta.dev/news?category=technology")
+    .then((res) => res.data)
+    .then((datas) => {
+      const { data } = datas;
+      setTechnology(data);
+    });
+  axios
+    .get("https://inshorts.deta.dev/news?category=entertainment")
+    .then((res) => res.data)
+    .then((datas) => {
+      const { data } = datas;
+      setEntertainments(data);
+    });
 
   const activeLink = ({ isActive }) => {
     return {
       color: isActive ? "blue" : "black",
     };
+  };
+  const cardData = {
+    cards,
+    business,
+    sports,
+    world,
+    science,
+    technology,
+    entertainments,
   };
 
   return (
@@ -83,20 +145,25 @@ function App() {
           </nav>
         </div>
       </header>
-      <Routes>
-        <Route path="/" element={<Cards cards={cards} />} />
-        <Route path="/business" element={<Business />}>
-          <Route path=":id" element={<BusinessItem />} />
-        </Route>
-        <Route path="/sports/*" element={<Sports />} />
-        <Route path="/sports/:id/*" element={<SportItem />} />
-        <Route path="/world" element={<World />} />
-        <Route path="/technology" element={<Technology />} />
-        <Route path="/entertainment" element={<Entertainment />} />
-        <Route path="/science" element={<Science />} />
-        <Route path="/all/:id/*" element={<CardItem cards={cards} />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <MainContext.Provider value={cardData}>
+        <Routes>
+          <Route path="/" element={<Cards />} />
+          <Route path="/all/:id" element={<CardItem />} />
+          <Route path="/business" element={<Business />} />
+          <Route path="/business/:id" element={<BusinessItem />} />
+          <Route path="/sports/*" element={<Sports />} />
+          <Route path="/sports/:id" element={<SportItem />} />
+          <Route path="/world" element={<World />} />
+          <Route path="/world/:id" element={<WorldItem />} />
+          <Route path="/technology" element={<Technology />} />
+          <Route path="/technology/:id" element={<TechnologyItem />} />
+          <Route path="/entertainment" element={<Entertainment />} />
+          <Route path="/entertainment/:id" element={<EntertainmentItem />} />
+          <Route path="/science" element={<Science />} />
+          <Route path="/science/:id" element={<ScienceItem />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </MainContext.Provider>
     </div>
   );
 }

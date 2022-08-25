@@ -1,8 +1,10 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
 import { useNavigate} from "react-router-dom";
-export const Cards = ({cards}) => {
+import { MainContext,useContext } from "../Context";
+export const Cards = () => {
   const navigate=useNavigate()
+  const{cards}=useContext(MainContext)
 
   return (
     <div className="all-cards">

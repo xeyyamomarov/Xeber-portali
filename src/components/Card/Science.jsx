@@ -1,25 +1,21 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-// import { MainContext, useContext } from "../Context";
-import { useEffect,useState} from "react";
-import axios from "axios";
+import { MainContext, useContext } from "../Context";
+import { useNavigate } from "react-router-dom";
 export const Science = () => {
-  const[science,setScience]=useState([])
-  useEffect(() => {
-    axios
-      .get("https://inshorts.deta.dev/news?category=science")
-      .then((res) => res.data)
-      .then((datas) => {
-        const { data } = datas;
-        setScience(data);
-      });
-  }, []);
+  const {science}=useContext(MainContext)
+  const navigate = useNavigate()
+
   return (
     <div className="all-cards">
     <div className="main">
       {science.slice(0, 6).map((card) => {
         return (
-          <div className="card" key={card.id}>
+          <div className="card" key={card.id}
+          onClick={() => {
+            navigate(`/science/${card.id}`);
+          }}
+          >
           <img className="img" src={card.imageUrl} alt="/" />
           <h1 className="title">{card.title}</h1>
           <p className="content">{card.content}</p>
