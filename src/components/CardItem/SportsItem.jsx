@@ -1,11 +1,12 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { MainContext, useContext } from "../Context";
 
 export const SportItem = () => {
   const { id } = useParams();
   const { sports } = useContext(MainContext);
+  const navigate=useNavigate()
   return (
     <div>
       <div className="main-item">
@@ -27,7 +28,7 @@ export const SportItem = () => {
                     </div>
                   </div>
                 </div>
-                <div className="content-item">
+                <div className="content-item1">
                   <h1>{sport.title}</h1>
                   <p>{sport.content}</p>
                 </div>
@@ -43,7 +44,11 @@ export const SportItem = () => {
         <div className="data">
           {sports?.slice(0, 3).map((sport) => {
             return (
-              <div key={sport.id} className="similar-card">
+              <div
+              onClick={()=>{
+                navigate(`/sports/${sport.id}`)
+              }}
+               key={sport.id} className="similar-card">
                 <div className="similar-content">
                   <h1>{sport.title}</h1>
                 </div>

@@ -5,7 +5,6 @@ import { MainContext, useContext } from "../Context";
 
 export const Business = () => {
   const { business } = useContext(MainContext);
-
   const navigate = useNavigate();
   return (
     <div className="all-cards">
@@ -14,7 +13,8 @@ export const Business = () => {
           return (
             <div
               onClick={() => {
-                navigate(`/business/${card.id}`);
+                navigate(`/business/${card.id}`)
+
               }}
               className="card"
               key={card.id}

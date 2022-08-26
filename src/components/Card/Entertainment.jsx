@@ -1,10 +1,11 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { MainContext, useContext } from "../Context";
 
 export const Entertainment = () => {
   const { entertainments } = useContext(MainContext);
+  // const {id}=useParams()
 
   const navigate = useNavigate();
   return (

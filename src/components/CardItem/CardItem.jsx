@@ -1,15 +1,17 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { useParams } from "react-router-dom";
-import { MainContext,useContext } from "../Context";
+import { useNavigate, useParams } from "react-router-dom";
+import { MainContext, useContext } from "../Context";
 
 export const CardItem = () => {
   const { id } = useParams();
-  const{cards}=useContext(MainContext)
+  const navigate = useNavigate();
+  const { cards } = useContext(MainContext);
   return (
     <div>
       <div className="main-item">
-        {cards?.filter((card) => card.id === id)
+        {cards
+          ?.filter((card) => card.id === id)
           .map((card) => {
             return (
               <div key={card.id} className="card-item">
@@ -26,7 +28,7 @@ export const CardItem = () => {
                     </div>
                   </div>
                 </div>
-                <div className="content-item">
+                <div className="content-item1">
                   <h1>{card.title}</h1>
                   <p>{card.content}</p>
                 </div>
@@ -36,13 +38,19 @@ export const CardItem = () => {
       </div>
       <div className="similar-news">
         <div id="news">
-        <p>Similar news</p>
+          <p>Similar news</p>
         </div>
 
         <div className="data">
           {cards?.slice(0, 3).map((card) => {
             return (
-              <div key={card.id} className="similar-card">
+              <div
+                key={card.id}
+                onClick={() => {
+                  navigate(`/all/${card.id}`);
+                }}
+                className="similar-card"
+              >
                 <div className="similar-content">
                   <h1>{card.title}</h1>
                 </div>

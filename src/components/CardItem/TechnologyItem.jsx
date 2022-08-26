@@ -1,11 +1,12 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { MainContext,useContext } from "../Context";
 
 export const TechnologyItem = () => {
   const { id } = useParams();
   const{technology}=useContext(MainContext)
+  const navigate=useNavigate()
   return (
     <div>
       <div className="main-item">
@@ -26,7 +27,7 @@ export const TechnologyItem = () => {
                     </div>
                   </div>
                 </div>
-                <div className="content-item">
+                <div className="content-item1">
                   <h1>{card.title}</h1>
                   <p>{card.content}</p>
                 </div>
@@ -35,25 +36,29 @@ export const TechnologyItem = () => {
           })}
       </div>
       <div className="similar-news">
-        <div className="a">
+        <div id="news">
         <p>Similar news</p>
         </div>
 
         <div className="data">
-          {technology?.slice(0, 3).map((business) => {
+          {technology?.slice(0, 3).map((card) => {
             return (
-              <div key={business.id} className="similar-card">
+              <div
+              onClick={()=>{
+                navigate(`/technology/${card.id}`)
+              }}
+               key={card.id} className="similar-card">
                 <div className="similar-content">
-                  <h1>{business.title}</h1>
+                  <h1>{card.title}</h1>
                 </div>
                 <div className="footer-similar">
                   <div className="icon">
                     <BsClock />
-                    <span>{business.date}</span>
+                    <span>{card.date}</span>
                   </div>
                   <div className="icon">
                     <BsFillPersonFill />
-                    <span>{business.author}</span>
+                    <span>{card.author}</span>
                   </div>
                 </div>
               </div>

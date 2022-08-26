@@ -1,16 +1,17 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { useParams } from "react-router-dom";
-import { MainContext,useContext } from "../Context";
+import { useNavigate, useParams } from "react-router-dom";
+import { MainContext, useContext } from "../Context";
 
 export const BusinessItem = () => {
   const { id } = useParams();
-  const{business}=useContext(MainContext)
-  // console.log(business)
+  const { business } = useContext(MainContext);
+  const navigate = useNavigate();
   return (
-    <div>
+    <>
       <div className="main-item">
-        {business?.filter((card) => card.id === id)
+        {business
+          .filter((card) => card.id === id)
           .map((card) => {
             return (
               <div key={card.id} className="card-item">
@@ -27,7 +28,7 @@ export const BusinessItem = () => {
                     </div>
                   </div>
                 </div>
-                <div className="content-item">
+                <div className="content-item1">
                   <h1>{card.title}</h1>
                   <p>{card.content}</p>
                 </div>
@@ -37,13 +38,19 @@ export const BusinessItem = () => {
       </div>
       <div className="similar-news">
         <div id="news">
-        <p>Similar news</p>
+          <p>Similar news</p>
         </div>
 
         <div className="data">
           {business?.slice(0, 3).map((business) => {
             return (
-              <div key={business.id} className="similar-card">
+              <div
+                onClick={() => {
+                  navigate(`/business/${business.id}`);
+                }}
+                key={business.id}
+                className="similar-card"
+              >
                 <div className="similar-content">
                   <h1>{business.title}</h1>
                 </div>
@@ -62,6 +69,6 @@ export const BusinessItem = () => {
           })}
         </div>
       </div>
-    </div>
+    </>
   );
 };
