@@ -23,7 +23,6 @@ import { ScienceItem } from "./components/CardItem/ScienceItem";
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [cardItem, setCardItem] = useState([]);
   const [business, setBusiness] = useState([]);
   const [sports, setSports] = useState([]);
   const [world, setWorld] = useState([]);
@@ -96,8 +95,6 @@ function App() {
     science,
     technology,
     entertainments,
-    cardItem,
-    setCardItem,
   };
 
   return (

@@ -1,48 +1,50 @@
 import "./style.css";
 import { BsClock, BsFillPersonFill } from "react-icons/bs";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MainContext, useContext } from "../Context";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const WorldItem = () => {
   const { id } = useParams();
   const { world } = useContext(MainContext);
-  const [worldItem, setWorldItem] = useState([]);
   const navigate = useNavigate();
 
-
-  useEffect(()=>{
-    setWorldItem(world)
-  },[world])
-
-  const worldFilter = worldItem.filter((card) => card.id === id);
-  if(worldFilter.length){
+  useEffect(() => {
+    if (!worldFilter.length) {
+      navigate("/");
+    }
+  });
+  const worldFilter = world.filter((card) => card.id === id);
   return (
-    <div>
+    <>
       <div className="main-item">
-        {worldFilter.map((card) => {
-          return (
-            <div key={card.id} className="card-item">
-              <div className="img-item">
-                <img src={card.imageUrl} alt="/" />
-                <div className="footer-item">
-                  <div className="icon">
-                    <BsClock />
-                    <span>{card.date}</span>
-                  </div>
-                  <div className="icon">
-                    <BsFillPersonFill />
-                    <span>{card.author}</span>
+        {worldFilter.length ? (
+          worldFilter.map((card) => {
+            return (
+              <div key={card.id} className="card-item">
+                <div className="img-item">
+                  <img src={card.imageUrl} alt="/" />
+                  <div className="footer-item">
+                    <div className="icon">
+                      <BsClock />
+                      <span>{card.date}</span>
+                    </div>
+                    <div className="icon">
+                      <BsFillPersonFill />
+                      <span>{card.author}</span>
+                    </div>
                   </div>
                 </div>
+                <div className="content-item1">
+                  <h1>{card.title}</h1>
+                  <p>{card.content}</p>
+                </div>
               </div>
-              <div className="content-item1">
-                <h1>{card.title}</h1>
-                <p>{card.content}</p>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <></>
+        )}
       </div>
       <div className="main-similar">
         <div className="similar-news">
@@ -79,10 +81,6 @@ export const WorldItem = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
-          }
-          else{
-            navigate("/")
-          }
 };
