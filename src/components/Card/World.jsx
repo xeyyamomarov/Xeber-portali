@@ -10,9 +10,9 @@ export const World = () => {
       <div className="main">
         {world.slice(0, 6).map((card) => {
           return (
-            <div  
-            onClick={() => {
-              navigate(`/world/${card.id}`);
+            <div 
+            onClick={()=>{
+              navigate(`/world/${card.id}`)
             }}
             className="card" key={card.id}>
               <img className="img" src={card.imageUrl} alt="/" />

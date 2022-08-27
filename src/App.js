@@ -23,6 +23,7 @@ import { ScienceItem } from "./components/CardItem/ScienceItem";
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [cardItem, setCardItem] = useState([]);
   const [business, setBusiness] = useState([]);
   const [sports, setSports] = useState([]);
   const [world, setWorld] = useState([]);
@@ -95,6 +96,8 @@ function App() {
     science,
     technology,
     entertainments,
+    cardItem,
+    setCardItem,
   };
 
   return (
@@ -150,7 +153,7 @@ function App() {
           <Route path="/" element={<Cards />} />
           <Route path="/all/:id" element={<CardItem />} />
           <Route path="/business" element={<Business />} />
-          <Route path="/business/:id" element={<BusinessItem />} />
+          <Route path="/business/:id/*" element={<BusinessItem />} />
           <Route path="/sports/*" element={<Sports />} />
           <Route path="/sports/:id" element={<SportItem />} />
           <Route path="/world" element={<World />} />
